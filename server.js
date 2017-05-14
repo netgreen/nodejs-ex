@@ -92,6 +92,20 @@ app.get('/pagecount', function (req, res) {
   }
 });
 
+app.get('/route_1', function (req, res) {
+	console.log("in route_1");
+  	 if (!db) {
+	    initDb(function(err){});
+	  }
+	  if (db) {
+	    db.collection('counts').count(function(err, count ){
+	      console.log('{ pageCount: ' + count + '}');
+	    });
+	  } else {
+	      console.log('{ pageCount: -1 }');
+	  }
+});
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
